@@ -1,5 +1,6 @@
 from .SplitTool import (
         SplitTool,
-        PageInterval
+        PageInterval,
+        PageIntervalConverter
     )
 from .PDFSplitTool import PDFSplitTool

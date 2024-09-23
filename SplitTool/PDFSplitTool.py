@@ -1,4 +1,4 @@
-from typing import Tuple, TypeAlias, Optional
+from typing import List, TypeAlias, Optional
 from io import BufferedReader, BufferedWriter
 from pathlib import Path
 import os
@@ -11,28 +11,35 @@ PageNumber: TypeAlias = Optional[int]
 
 
 class PDFSplitTool(SplitTool):
-    EXTENSTION = '.pdf'
+    EXTENSTION: str = '.pdf'
 
     @classmethod
-    def split_file(cls, file: Path, output_path: Path, *args: Tuple[PageInterval]):
+    def split_file(cls, file: Path, output_path: Path,
+                   *args: List[PageInterval]):
         with cls.get_input_file(file) as input_file:
             pdf_reader: PyPDF2.PdfReader = PyPDF2.PdfReader(input_file)
             pages: list[PyPDF2.PageObject] = pdf_reader.pages
 
             for begin_interval, end_interval in args:
+                if begin_interval is None:
+                    raise ValueError('Не указано значение начала интервала!')
+
                 if not cls.__check_page_number(begin_interval, len(pages)):
                     raise ValueError(
-                        'Incorrect page number!'
-                        'Please check entered value, 1 <= value <= page count'
+                        'Некорректное значение!\n'
+                        'Пожалуйста, проверьте введенное значение начала интервала, '
+                        f'оно должно быть в диапазоне от 1 до {len(pages)}'
                     )
 
-                if not end_interval:
-                    end_interval: PageNumber = begin_interval
+                if end_interval is None:
+                    raise ValueError('Не указано значение конца интервала!')
 
-                if not cls.__check_page_number(end_interval, len(pages)):
+                if not (cls.__check_page_number(end_interval, len(pages))
+                        and cls.__check_page_number(begin_interval, end_interval)):
                     raise ValueError(
-                        'Incorrect page number!'
-                        'Please check entered value, 1 <= value <= page count'
+                        'Некорректное значение!\n'
+                        'Пожалуйста, проверьте введенное значение конца интервала, '
+                        f'оно должно быть в диапазоне от {begin_interval} до {len(pages)}'
                     )
 
                 pdf_writer: PyPDF2.PdfWriter = PyPDF2.PdfWriter()

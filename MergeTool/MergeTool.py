@@ -7,6 +7,6 @@ class MergeTool(Protocol):
     EXTENSTION: str = '.txt'
 
     @classmethod
-    def merge_files(cls, path_to_file: Path,
+    def merge_files(cls, output_path: Path,
                     *args: Tuple[Path]):
         pass

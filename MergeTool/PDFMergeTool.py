@@ -12,10 +12,10 @@ class PDFMergeTool(MergeTool):
     EXTENSTION: str = '.pdf'
 
     @classmethod
-    def merge_files(cls, path_to_file: Path,
+    def merge_files(cls, output_path: Path,
                     *args: Tuple[Path]):
 
-        with cls.get_output_file(path_to_file) as output_file:
+        with cls.get_output_file(output_path) as output_file:
             pdf_writer: PyPDF2.PdfWriter = PyPDF2.PdfWriter()
 
             for path in args:
@@ -62,4 +62,3 @@ class PDFMergeTool(MergeTool):
             is_existed: bool = os.path.isfile(suggested_file_path)
 
         return full_file_name
-
