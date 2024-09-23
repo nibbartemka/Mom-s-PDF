@@ -55,6 +55,10 @@ class IntervalEnteringWindow(QMainWindow):
                 PageIntervalConverter.convert_line_to_page_interval(item)
                 for item in self.interval_input.text().split()
             ]
+
+            if not page_intervals:
+                raise ValueError("Поле ввода интервалов пусто!\nРазделение невозможно")
+
             self.split_tool.split_file(self.input_file, self.output_directory,
                                        *page_intervals)
             question = QMessageBox.question(self,
