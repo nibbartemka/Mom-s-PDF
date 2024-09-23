@@ -34,7 +34,7 @@ class IntervalEnteringWindow(QMainWindow):
         central_widget: QWidget = QWidget()
 
         self.interval_input: QLineEdit = QLineEdit()
-        self.interval_input.setPlaceholderText('Пример: 1-2 3-5 6-6')
+        self.interval_input.setPlaceholderText('Пример: 1-5 6-6')
 
         self.split_button: QPushButton = QPushButton('Разделить')
         self.split_button.clicked.connect(self.split_files)
@@ -213,7 +213,7 @@ class SplitTab(QWidget):
         except FileExistsError:
             QMessageBox.warning(None,
                                 'Предупреждение',
-                                ('Директория не выбрана!\n'
+                                ('Директория для сохранения файлов не выбрана!\n'
                                  f'Будет использована директория по умолчанию:\n{str(self.output_directory)}'))
         self.update_label_text(self.output_directory_label,
                                str(self.output_directory))

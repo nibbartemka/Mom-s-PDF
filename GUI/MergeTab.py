@@ -161,7 +161,7 @@ class MergeTab(QTabWidget):
         except FileExistsError:
             QMessageBox.warning(None,
                                 'Предупреждение',
-                                ('Директория не выбрана!\n'
+                                ('Директория для сохранения файла не выбрана!\n'
                                  f'Будет использована директория по умолчанию:\n{str(self.output_directory)}'))
         self.update_label_text(self.output_directory_label,
                                str(self.output_directory))

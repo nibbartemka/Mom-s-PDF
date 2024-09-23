@@ -1,3 +1,4 @@
+altgraph==0.17.4
 certifi==2024.8.30
 charset-normalizer==3.3.2
 guidata==3.1.0
@@ -6,7 +7,10 @@ h5py==3.11.0
 idna==3.8
 numpy==2.1.1
 packaging==24.1
+pefile==2024.8.26
 pillow==10.4.0
+pyinstaller==6.10.0
+pyinstaller-hooks-contrib==2024.8
 PyPDF2==3.0.1
 pyqt-tools==1.0.0
 PyQt5==5.15.11
@@ -16,6 +20,7 @@ PyQt6==6.7.1
 PyQt6-Qt6==6.7.2
 PyQt6_sip==13.8.0
 PythonQwt==0.12.7
+pywin32-ctypes==0.2.3
 QtPy==2.4.1
 requests==2.32.3
 scipy==1.14.1
